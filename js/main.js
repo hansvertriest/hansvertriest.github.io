@@ -1,0 +1,1 @@
+const pageScroller = new PageScroller('page-scroller', 500);
