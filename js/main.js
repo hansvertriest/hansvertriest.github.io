@@ -1,23 +1,34 @@
 const bg = document.getElementById('landing-mountains__bg');
 const fg = document.getElementById('landing-mountains__fg');
+const nameElement = document.getElementById('page-1__name');
 
-let bgPosY = 125;
-let fgPosY = 135;
+// place mountains
 
-bg.style.backgroundPositionY = `${bgPosY}%`
-fg.style.backgroundPositionY = `${fgPosY}%`
+let bgPosY = -50;
+let fgPosY = -120;
 
 const parallaxDown = () => {
-	bg.style.backgroundPositionY = `${bgPosY-40}%`
-	fg.style.backgroundPositionY = `${fgPosY}%`
+	bg.style.bottom = `${bgPosY+120}px`
+	fg.style.bottom = `${fgPosY}px`
 }
 
 const parallaxUp = () => {
-	bg.style.backgroundPositionY = `${bgPosY+10}%`
-	fg.style.backgroundPositionY = `${fgPosY}%`
+	bg.style.bottom = `${bgPosY+10}px`
+	fg.style.bottom = `${fgPosY}px`
 }
 
-const pageScroller = new PageScroller('page-scroller', 500);
+const onResize = () => {
+	console.log('resize')
+	
+	bg.style.backgroundPositionY = `${bgPosY}%`
+	fg.style.backgroundPositionY = `${fgPosY}%`
+	
+	// position name
+	nameElement.style.left = `${(((window.innerWidth) / 2) -( nameElement.offsetWidth / 2)) }px`;
+	nameElement.style.top = `${(((window.innerHeight) / 2) -( nameElement.offsetHeight / 2)) }px`;
+}
+
+const pageScroller = new PageScroller('page-scroller', 300);
 
 pageScroller.set({
 	reset: 'true',
@@ -34,5 +45,15 @@ pageScroller.set({
 				callback: () => parallaxUp(),
 			}
 		],
+		
+	easingForAll : {
+		from: '1',
+		to: '2',
+		func: 'easeInOutCubic',
+	}
 	}
 );
+
+// ===== Page-1
+onResize();
+window.addEventListener('resize', onResize);

@@ -8,14 +8,12 @@ canvas.height = window.innerHeight;
 const starRatio = 0.0007; //aantal sterren per vierkante pixel
 
 const maxBigStarRadius = 1.5;
-const bigStarGlow = 100; //Hoe neig een grote ster maximaal kan schijnen
-const maxBigTwinkleSpeed = 100; //Hoe snel een grote ster zal twinkelen
+
+const maxSmallGlowCycle = 3000; // ms 
+const maxSmallGowIntensity = 10; 
 
 const maxSmallStarRadius = 1;
-const smallStarGlow = 20;
-const maxSmallTwinkleSpeed = 800;
 
-const twinkleAnimationSpeed = 0.02;
 
 const oppScreen = canvas.width * canvas.height;
 const totalSmallStars = starRatio * oppScreen;
@@ -23,10 +21,9 @@ const totalBigStars = totalSmallStars / 100;
 
 const smallStarList = []
 const bigStarList = []
+const twinkleStarList = []
 
 let beeldScale = canvas.width / 1300;
-
-const fadeSpeed = 0.005;
 
 let bgPositionFactor = 1.1;
 let fgPositionFactor = 1.2;
@@ -48,23 +45,37 @@ window.addEventListener('resize', () => {
 //Sterren
 
 class Star {
-	constructor (x, y, radius, maxGlow, twinkleSpeed) {
+	constructor (x, y, radius, glowingProps) {
 		this.x = x;
 		this.y = y;
+		this.initRadius = radius;
 		this.radius = radius;
 		this.kleur = 'white';
-	
-		this.maxGlow = maxGlow;
-		this.twinkleGlow = maxGlow; //is eigenlijk de actuele glow, initieel gelijk aan maximale glow
-		this.twinkleSpeed = twinkleSpeed
-		this.twinklecounter = 0;
+
+		this.starIntensityFactor = (glowingProps) ? glowingProps.starIntensityFactor : undefined ;
+		this.animationStart = (glowingProps) ? glowingProps.animationStart : undefined;
+		this.animationCycle = (glowingProps) ? glowingProps.animationCycle : undefined;
+		this.twinklePause = (glowingProps) ? glowingProps.twinklePause : undefined;
+		
+		this.animationPrePause = this.twinklePause * Math.random();
 	
 		this.opacity = 1.0;
+	}
+
+	drawTwinkle(time) {
+		const maxRadius = this.starIntensityFactor * this.initRadius;
+		this.radius = (Math.sin((time/this.animationCycle) + this.animationPrePause) * (maxRadius / 2)) + maxRadius;
 	}
 
 	draw() {
 		c.beginPath();
 		c.fillStyle = this.kleur;
+			
+		const dateNow = new Date().getTime();
+		const time = dateNow - this.animationStart ;
+		if (this.starIntensityFactor && this.animationCycle && this.animationStart) {
+			this.drawTwinkle(time);
+		}
 
 		c.arc(this.x, this.y, this.radius, 0, Math.PI * 2, );
 		c.fill();
@@ -89,14 +100,9 @@ const animation = () => {
 		bigStarList[i].draw();
 	}
 
-	// drawImage
-	// const imgBg = new Image()
-	// imgBg.src = "./images/bg.png"
-	// c.drawImage(imgBg, 0, canvas.height - imgBg.height/bgPositionFactor)
-
-	// const imgFg = new Image()
-	// imgFg.src = "./images/fg.png"
-	// c.drawImage(imgFg, 0, canvas.height - imgFg.height/fgPositionFactor)
+	for (i = 0; i < twinkleStarList.length; i++) {
+		twinkleStarList[i].draw();
+	}
 }
 
 const init = () => {
@@ -105,17 +111,25 @@ const init = () => {
 		var x = Math.random() * (canvas.width);
 		var y = Math.random() * (canvas.height);
 		var radius = Math.random() * maxSmallStarRadius + 0.1;
-		var twinkleSpeed = Math.random() * maxSmallTwinkleSpeed + 30;
-		smallStarList[i] = new Star(x, y, radius, smallStarGlow, twinkleSpeed);
+		const time = new Date();
+		smallStarList[i] = new Star(x, y, radius, { animationCycle: 800, starIntensityFactor: 1.05, animationStart: time.getTime(), twinklePause: 1000000000000000000});
 	}
+
 	//genereer grote sterren
 	for (i = 0; i < totalBigStars; i++) {
 		var x = Math.random() * (canvas.width);
 		var y = Math.random() * (canvas.height);
 		var radius = Math.random() * (maxBigStarRadius - maxSmallStarRadius) + maxBigStarRadius + 0.1;
-		var twinkleSpeed = Math.random() * (maxBigTwinkleSpeed - maxSmallTwinkleSpeed) + maxBigTwinkleSpeed;
-		/*bigStarList[i] = new Star(x, y, radius, bigStarGlow, twinkleSpeed );*/
-		bigStarList[i] = new Star(x, y, radius, bigStarGlow, twinkleSpeed);
+		bigStarList[i] = new Star(x, y, radius);
+	}
+
+	//genereer grote sterren
+	for (i = 0; i < 10 ; i++) {
+		var x = Math.random() * (canvas.width);
+		var y = Math.random() * (canvas.height);
+		var radius = Math.random() * (maxBigStarRadius - maxSmallStarRadius) + maxBigStarRadius + 0.1;
+		const time = new Date();
+		twinkleStarList[i] = new Star(x, y, radius, { animationCycle: 400, starIntensityFactor: 1.2, animationStart: time.getTime(), twinklePause: 10000000});
 	}
 }
 
