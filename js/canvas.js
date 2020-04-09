@@ -88,14 +88,15 @@ const animation = () => {
 	for (i = 0; i < totalBigStars; i++) {
 		bigStarList[i].draw();
 	}
-	// c.drawImage("../images/bg.png", 0, 0)
-	const imgBg = new Image()
-	imgBg.src = "./images/bg.png"
-	c.drawImage(imgBg, 0, canvas.height - imgBg.height/bgPositionFactor)
 
-	const imgFg = new Image()
-	imgFg.src = "./images/fg.png"
-	c.drawImage(imgFg, 0, canvas.height - imgFg.height/fgPositionFactor)
+	// drawImage
+	// const imgBg = new Image()
+	// imgBg.src = "./images/bg.png"
+	// c.drawImage(imgBg, 0, canvas.height - imgBg.height/bgPositionFactor)
+
+	// const imgFg = new Image()
+	// imgFg.src = "./images/fg.png"
+	// c.drawImage(imgFg, 0, canvas.height - imgFg.height/fgPositionFactor)
 }
 
 const init = () => {
