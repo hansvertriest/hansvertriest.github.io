@@ -72,3 +72,19 @@ window.addEventListener('scroll', ()=> {
 	nameContainer.style.left = `${(((window.innerWidth) / 2) -( nameContainer.offsetWidth / 2)) }px`;
 	nameContainer.style.top = `${(((window.innerHeight) / 2) -( nameContainer.offsetHeight / 2)) }px`;
 })
+
+window.addEventListener('touchmove', ()=> {
+	const newInnerHTML = 'Oh, I should introduce myself properly...'
+	const clickMeButton = document.getElementById('landing-name__subtext');
+	if (window.pageYOffset + 100 > window.innerHeight / 2) {
+		nameElement.innerHTML = newInnerHTML;
+		nameElement.classList.add('landing-name__text--transformed');
+		clickMeButton.style.display = 'inherit';
+	} else if (nameElement.innerHTML === newInnerHTML) {
+		nameElement.innerHTML = 'Hans Vertriest';
+		nameElement.classList.remove('landing-name__text--transformed');
+		clickMeButton.style.display = 'none';
+	}
+	nameContainer.style.left = `${(((window.innerWidth) / 2) -( nameContainer.offsetWidth / 2)) }px`;
+	nameContainer.style.top = `${(((window.innerHeight) / 2) -( nameContainer.offsetHeight / 2)) }px`;
+})
