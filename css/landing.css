@@ -1,0 +1,73 @@
+#landing-name {
+	position: fixed;
+	z-index: 1;
+	color: var(--yellow);
+}
+
+#landing-name__text {
+	font-size: 3em;
+	font-family: 'Oswald', cursive;
+}
+
+.landing-name__text--transformed {
+	color: var(--red);
+	font-size: 2em;
+}
+
+#landing-name__subtext {
+	display: none;
+	text-align:center;
+	color: var(--secondary-color);
+	font-family: 'Raleway', sans-serif;
+	font-size: 1.4em;
+	
+	animation-duration: 2s;
+	animation-iteration-count: infinite;
+	animation-name: bounce-3;
+	animation-timing-function: ease-in-out;
+}
+
+@keyframes bounce-3 {
+	0%   { transform: translateY(0); }
+	30%  { transform: translateY(-10px); }
+	50%  { transform: translateY(0); }
+	100% { transform: translateY(0); }
+}
+
+@media only screen and (max-width: 700px) {
+	.landing-name__text--transformed {
+		font-size: 2em !important;
+	}
+}
+
+canvas {
+	position: absolute;
+	height: 100vh;
+	width: 100vw;
+}
+#landing-mountains {
+	z-index: 1;
+	position:absolute;
+	overflow: hidden;
+	width: 100vw;
+	height: 100vh;
+}
+
+#landing-mountains__bg {
+	width: 100vw;
+	min-width: 1200px;
+	position: absolute;
+	bottom: -50px;
+	transition: bottom 0.7s;
+}
+
+#landing-mountains__fg {
+	width: 100vw;
+	min-width: 550px;
+	position: absolute;
+	bottom: -120px;
+}
+
+#page-2 {
+	background-color: #00181C;
+}

@@ -1,6 +1,7 @@
 const bg = document.getElementById('landing-mountains__bg');
 const fg = document.getElementById('landing-mountains__fg');
-const nameElement = document.getElementById('page-1__name');
+const nameContainer = document.getElementById('landing-name');
+const nameElement = document.getElementById('landing-name__text');
 
 // place mountains
 
@@ -18,14 +19,12 @@ const parallaxUp = () => {
 }
 
 const onResize = () => {
-	console.log('resize')
-	
 	bg.style.backgroundPositionY = `${bgPosY}%`
 	fg.style.backgroundPositionY = `${fgPosY}%`
 	
 	// position name
-	nameElement.style.left = `${(((window.innerWidth) / 2) -( nameElement.offsetWidth / 2)) }px`;
-	nameElement.style.top = `${(((window.innerHeight) / 2) -( nameElement.offsetHeight / 2)) }px`;
+	nameContainer.style.left = `${(((window.innerWidth) / 2) -( nameContainer.offsetWidth / 2)) }px`;
+	nameContainer.style.top = `${(((window.innerHeight) / 2) -( nameContainer.offsetHeight / 2)) }px`;
 }
 
 const pageScroller = new PageScroller('page-scroller', 300);
@@ -57,3 +56,19 @@ pageScroller.set({
 // ===== Page-1
 onResize();
 window.addEventListener('resize', onResize);
+
+window.addEventListener('scroll', ()=> {
+	const newInnerHTML = 'Oh, I should introduce myself properly...'
+	const clickMeButton = document.getElementById('landing-name__subtext');
+	if (window.pageYOffset + 100 > window.innerHeight / 2) {
+		nameElement.innerHTML = newInnerHTML;
+		nameElement.classList.add('landing-name__text--transformed');
+		clickMeButton.style.display = 'inherit';
+	} else if (nameElement.innerHTML === newInnerHTML) {
+		nameElement.innerHTML = 'Hans Vertriest';
+		nameElement.classList.remove('landing-name__text--transformed');
+		clickMeButton.style.display = 'none';
+	}
+	nameContainer.style.left = `${(((window.innerWidth) / 2) -( nameContainer.offsetWidth / 2)) }px`;
+	nameContainer.style.top = `${(((window.innerHeight) / 2) -( nameContainer.offsetHeight / 2)) }px`;
+})
