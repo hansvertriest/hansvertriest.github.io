@@ -36,6 +36,7 @@ window.mobileAndTabletcheck = function() {
 const pageScroller = new PageScroller('page-scroller', 300);
 
 pageScroller.set({
+	dragTreshold: 0.3,
 	reset: 'true',
 	whileTransitioning : 
 		[
