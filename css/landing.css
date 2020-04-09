@@ -38,6 +38,13 @@
 	.landing-name__text--transformed {
 		font-size: 2em !important;
 	}
+
+	#landing-mountains__fg {
+		width: 100vw;
+		min-width: 550px;
+		position: absolute;
+		bottom: 0px !important;
+	}
 }
 
 canvas {
