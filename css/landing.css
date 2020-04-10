@@ -2,6 +2,7 @@
 	position: fixed;
 	z-index: 1;
 	color: var(--yellow);
+	padding: 0 8% 0 8%;
 }
 
 #landing-name__text {
@@ -12,6 +13,7 @@
 .landing-name__text--transformed {
 	color: var(--red);
 	font-size: 2em;
+	text-align: center;
 }
 
 #landing-name__subtext {
@@ -35,12 +37,22 @@
 }
 
 @media only screen and (max-width: 700px) {
+	#landing-name__text {
+		/* font-size: 1.8em !important; */
+	}
+
 	.landing-name__text--transformed {
 		font-size: 2em !important;
 	}
 
+	#landing-mountains__bg {
+		/* bottom: 0px !important; */
+		bottom: -20px !important;
+	}
+
 	#landing-mountains__fg {
-		bottom: 0px !important;
+		/* bottom: 0px !important; */
+		bottom: -60px !important;
 	}
 }
 
@@ -58,16 +70,17 @@ canvas {
 }
 
 #landing-mountains__bg {
-	width: 100vw;
-	min-width: 1200px;
+	
+	max-width: 700px;
+	min-width: 100vw;
 	position: absolute;
 	bottom: -50px;
 	transition: bottom 0.7s;
 }
 
 #landing-mountains__fg {
-	width: 100vw;
-	min-width: 550px;
+	max-width: 700px;
+	min-width: 100vw;
 	position: absolute;
-	bottom: -120px;
+	bottom: -100px;
 }

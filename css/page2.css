@@ -1,4 +1,4 @@
 
 #page-2 {
-	background-color: #092F47;
+	background-color: var(--bg-color);
 }
