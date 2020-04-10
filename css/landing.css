@@ -3,11 +3,13 @@
 	z-index: 1;
 	color: var(--yellow);
 	padding: 0 8% 0 8%;
+
 }
 
 #landing-name__text {
 	font-size: 3em;
 	font-family: 'Oswald', cursive;
+	cursor: auto;
 }
 
 .landing-name__text--transformed {
@@ -22,6 +24,7 @@
 	color: var(--secondary-color);
 	font-family: 'Raleway', sans-serif;
 	font-size: 1.4em;
+	cursor: pointer;
 	
 	animation-duration: 3s;
 	animation-iteration-count: infinite;
@@ -70,7 +73,6 @@ canvas {
 }
 
 #landing-mountains__bg {
-	
 	max-width: 700px;
 	min-width: 100vw;
 	position: absolute;

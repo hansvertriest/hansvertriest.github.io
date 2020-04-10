@@ -2,8 +2,15 @@ const bg = document.getElementById('landing-mountains__bg');
 const fg = document.getElementById('landing-mountains__fg');
 const nameContainer = document.getElementById('landing-name');
 const nameElement = document.getElementById('landing-name__text');
+const nameSubText = document.getElementById('landing-name__subtext');
 
-// place mountains
+const greetingHi = document.getElementById('greeting-hi');
+const greetingMyName = document.getElementById('greeting-my-name');
+const greetingName = document.getElementById('greeting-name');
+const greetingContainer = document.getElementById('greeting-container')
+
+// global variables
+let hasSaidHello = false;
 
 let bgPosY = -50;
 let fgPosY = -120;
@@ -25,6 +32,29 @@ const onResize = () => {
 	// position name
 	nameContainer.style.left = `${(((window.innerWidth) / 2) -( nameContainer.offsetWidth / 2)) }px`;
 	nameContainer.style.top = `${(((window.innerHeight) / 2) -( nameContainer.offsetHeight / 2)) }px`;
+}
+
+const animatePage2 = () => {
+	const tl = gsap.timeline({repeat: 0, repeatDelay: 0});
+	tl
+		.to("#greeting-hi", 0.6, {opacity: '1', ease: Power3.easeIn})
+		.fromTo("#greeting-hi", 0.6, {x: '-10%'}, {x: '0', ease: Power3.easeIn}, "-=0.6")
+
+		.to("#greeting-my-name", 0.4, {opacity: '1', ease: Power3.easeIn}, 0.8)
+		.fromTo("#greeting-my-name", 0.8, {y: `${greetingMyName.offsetHeight}px`}, {y: `0`, ease: Power2.easeIn}, "-=0.6")
+		// .fromTo("#greeting-my-name", 0.8, {height: '0'}, {height: `${greetingMyName.offsetHeight}px`, ease: Power2.easeIn})
+
+		.to("#greeting-name", 0, {opacity: '1', ease: Power3.easeIn})
+		.fromTo("#greeting-name", 0.6, {width: '0'}, {width: `${greetingName.offsetWidth}px`, ease: Power2.easeIn})
+
+		.to("#greeting-hi", 0.8, {opacity: '0', ease: Power3.easeInOut}, 2.5)
+		.fromTo("#greeting-hi", 1, {x: '0'}, {x: '-50%', ease: Power3.easeInOut}, '-=0.4')
+
+		.to("#greeting-my-name", 0.6, {opacity: '0', ease: Power3.easeInOut}, '-=0.8')
+		.fromTo("#greeting-my-name", 0.8, {x: '0'}, {x: '-35%', ease: Power3.easeInOut}, '-=0.8')
+		
+		.to("#greeting-name", 0.4, {y: `-${greetingName.offsetTop - greetingContainer.offsetTop + window.innerHeight * 0.1}`, ease: Power3.easeInOut})
+
 }
 
 window.mobileAndTabletcheck = function() {
@@ -67,14 +97,17 @@ window.addEventListener('resize', onResize);
 window.addEventListener('scroll', ()=> {
 	const newInnerHTML = 'Oh, I should introduce myself properly...'
 	const clickMeButton = document.getElementById('landing-name__subtext');
-	if (window.pageYOffset + 100 > window.innerHeight / 2) {
+	if (window.pageYOffset + 100 > window.innerHeight / 2 && !hasSaidHello) {
 		nameElement.innerHTML = newInnerHTML;
 		nameElement.classList.add('landing-name__text--transformed');
 		clickMeButton.style.display = 'inherit';
-	} else if (nameElement.innerHTML === newInnerHTML) {
+	} else if (nameElement.innerHTML === newInnerHTML && !hasSaidHello) {
 		nameElement.innerHTML = 'Hans Vertriest';
 		nameElement.classList.remove('landing-name__text--transformed');
 		clickMeButton.style.display = 'none';
+	
+		nameContainer.style.opacity = '1';
+		nameContainer.style.display = 'inherit';
 	}
 	nameContainer.style.left = `${(((window.innerWidth) / 2) -( nameContainer.offsetWidth / 2)) }px`;
 	nameContainer.style.top = `${(((window.innerHeight) / 2) -( nameContainer.offsetHeight / 2)) }px`;
@@ -91,7 +124,21 @@ window.addEventListener('touchmove', ()=> {
 		nameElement.innerHTML = 'Hans Vertriest';
 		nameElement.classList.remove('landing-name__text--transformed');
 		clickMeButton.style.display = 'none';
+	
+		nameContainer.style.opacity = '1';
+		nameContainer.style.display = 'inherit';
 	}
 	nameContainer.style.left = `${(((window.innerWidth) / 2) -( nameContainer.offsetWidth / 2)) }px`;
 	nameContainer.style.top = `${(((window.innerHeight) / 2) -( nameContainer.offsetHeight / 2)) }px`;
+})
+
+nameSubText.addEventListener('click', () => {
+	hasSaidHello = true;
+	const animationLength = 0.7;
+	nameContainer.style.transition = `opacity ${animationLength}s`;
+	nameContainer.style.opacity = '0';
+	setTimeout(() => {
+		nameContainer.style.display = 'none';
+	}, animationLength * 1000)
+	animatePage2();
 })
