@@ -12,7 +12,7 @@
 	color: var(--blue-white);
 	font-size: 8em;
 	font-family: var(--title-font);
-	margin: 0;
+	margin: 0 5%;
 	font-weight: 500;
 	line-height: 1em;
 }
@@ -41,4 +41,14 @@
 
 .greeting__text--red {
 	color: var(--red);
+}
+
+@media only screen and (max-width: 700px) {
+	.greeting__text {
+		font-size: 5em;
+	}
+	.greeting__text--big-yellow {
+		color: var(--yellow);
+		font-size: 8em;
+	}
 }
