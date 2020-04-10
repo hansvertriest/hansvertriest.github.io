@@ -87,10 +87,11 @@ class Star {
 
 const animation = () => {
 	requestAnimationFrame(animation);
-	var grd = c.createLinearGradient(0, 0, 0, (canvas.height * 75) / 100);
-	grd.addColorStop(0, '#00001a');
-	grd.addColorStop(1, '#003333');
+	var grd = c.createLinearGradient(0, 0, 0, (canvas.height * 100) / 30);
+	grd.addColorStop(0, '#17384D');
+	grd.addColorStop(1, '#246880');
 	c.fillStyle = grd;
+
 
 	c.fillRect(0, 0, canvas.width, canvas.height);
 	for (i = 0; i < totalSmallStars; i++) {

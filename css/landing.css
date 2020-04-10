@@ -40,9 +40,6 @@
 	}
 
 	#landing-mountains__fg {
-		width: 100vw;
-		min-width: 550px;
-		position: absolute;
 		bottom: 0px !important;
 	}
 }
@@ -73,8 +70,4 @@ canvas {
 	min-width: 550px;
 	position: absolute;
 	bottom: -120px;
-}
-
-#page-2 {
-	background-color: #00181C;
 }
