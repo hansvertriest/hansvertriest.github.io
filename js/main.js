@@ -142,3 +142,15 @@ nameSubText.addEventListener('click', () => {
 	}, animationLength * 1000)
 	animatePage2();
 })
+
+
+nameSubText.addEventListener('touch', () => {
+	hasSaidHello = true;
+	const animationLength = 0.7;
+	nameContainer.style.transition = `opacity ${animationLength}s`;
+	nameContainer.style.opacity = '0';
+	setTimeout(() => {
+		nameContainer.style.display = 'none';
+	}, animationLength * 1000)
+	animatePage2();
+});
