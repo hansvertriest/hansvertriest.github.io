@@ -9,6 +9,9 @@ const greetingMyName = document.getElementById('greeting-my-name');
 const greetingName = document.getElementById('greeting-name');
 const greetingContainer = document.getElementById('greeting-container')
 
+const skillContainer = document.getElementById('content-container__skills');
+const contentDivider = document.getElementById('content-container__divider');
+
 // global variables
 let hasSaidHello = false;
 
@@ -28,10 +31,6 @@ const parallaxUp = () => {
 const onResize = () => {
 	bg.style.backgroundPositionY = `${bgPosY}%`
 	fg.style.backgroundPositionY = `${fgPosY}%`
-	
-	// position name
-	nameContainer.style.left = `${(((window.innerWidth) / 2) -( nameContainer.offsetWidth / 2)) }px`;
-	nameContainer.style.top = `${(((window.innerHeight) / 2) -( nameContainer.offsetHeight / 2)) }px`;
 }
 
 const animatePage2 = () => {
@@ -54,7 +53,57 @@ const animatePage2 = () => {
 		
 		.to("#greeting-name", 0.4, {y: `-${greetingName.offsetTop - greetingContainer.offsetTop + window.innerHeight * 0.1}`, ease: Power3.easeInOut})
 		
+		.to("#content-container", 0, {visibility: 'auto'})
+		.fromTo("#content-container", 0.6, {opacity: '0'}, {opacity: '1', ease: Power3.easeInOut}, "+=0.4")
+		.fromTo("#content-container", 0.8, {x: '35%'}, {x: '0', ease: Power3.easeInOut}, '-=0.6')
+}
 
+let skillsAreShown = false;
+
+const showSkillBars = () => {
+	if (window.innerWidth < 700) {
+		if (!skillsAreShown) {
+			skillsAreShown = true;
+			contentDivider.classList.remove('bar-left-animation');
+			contentDivider.classList.add('bar-right-animation');
+			const tl = gsap.timeline({repeat: 0, repeatDelay: 0});
+			tl	
+				.to('.content-container__text', 0.6, {width: '0vw', ease: Power3.easeInOut})
+				.fromTo('#content-container__skills', 0.6, {width: '0'}, {width: '80vw', ease: Power3.easeInOut}, "-=0.6")
+		}
+	} else {
+		if (!skillsAreShown) {
+			skillsAreShown = true;
+			contentDivider.classList.remove('bar-right-animation');
+			contentDivider.classList.remove('bar-left-animation');
+			const tl = gsap.timeline({repeat: 0, repeatDelay: 0});
+			tl	
+				.fromTo('#content-container__skills', 0.6, {width: '0'}, {width: '40vw', ease: Power3.easeInOut})
+		}
+	}
+}
+
+const hideSkillBars = () => {
+	if (window.innerWidth < 700) {
+		if (skillsAreShown) {
+			skillsAreShown = false;
+			contentDivider.classList.remove('bar-right-animation');
+			contentDivider.classList.add('bar-left-animation');
+			const tl = gsap.timeline({repeat: 0, repeatDelay: 0});
+			tl	
+			.to('.content-container__text', 0.6, {width: '500px', ease: Power3.easeInOut})
+			.fromTo('#content-container__skills', 0.6, {width: '80vw'}, {width: '0', ease: Power3.easeInOut}, "-=0.6")
+		}
+	} else {
+		if (skillsAreShown) {
+			skillsAreShown = false;
+			contentDivider.classList.remove('bar-right-animation');
+			contentDivider.classList.add('bar-left-animation');
+			const tl = gsap.timeline({repeat: 0, repeatDelay: 0});
+			tl	
+				.fromTo('#content-container__skills', 0.6, {width: '40vw'}, {width: '0', ease: Power3.easeInOut})
+		}
+	}
 }
 
 window.mobileAndTabletcheck = function() {
@@ -107,10 +156,7 @@ window.addEventListener('scroll', ()=> {
 		clickMeButton.style.display = 'none';
 	
 		nameContainer.style.opacity = '1';
-		nameContainer.style.display = 'inherit';
 	}
-	nameContainer.style.left = `${(((window.innerWidth) / 2) -( nameContainer.offsetWidth / 2)) }px`;
-	nameContainer.style.top = `${(((window.innerHeight) / 2) -( nameContainer.offsetHeight / 2)) }px`;
 })
 
 window.addEventListener('touchmove', ()=> {
@@ -153,4 +199,16 @@ nameSubText.addEventListener('touch', () => {
 		nameContainer.style.display = 'none';
 	}, animationLength * 1000)
 	animatePage2();
+});
+
+contentDivider.addEventListener('mouseover', showSkillBars);
+skillContainer.addEventListener('mouseleave', hideSkillBars);
+
+contentDivider.addEventListener('touch', () => {
+	console.log('ddd');
+	if (skillsAreShown) {
+		hideSkillBars();
+	} else {
+		showSkillBars();
+	}
 });
