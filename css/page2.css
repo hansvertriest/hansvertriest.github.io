@@ -61,13 +61,13 @@
 	align-items: stretch;
 	justify-content: center;
 	max-width: 80vw;
+	
 }
 
 .content-container__text {
 	font-family: var(--text-font);
 	color: var(--white);
 	width: 500px;
-	height: 300px;
 	font-size: 1.2em;
 	line-height: 1.8em;
 	overflow: hidden;

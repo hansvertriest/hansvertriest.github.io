@@ -9,6 +9,7 @@ const greetingMyName = document.getElementById('greeting-my-name');
 const greetingName = document.getElementById('greeting-name');
 const greetingContainer = document.getElementById('greeting-container')
 
+const textContainer = document.getElementById('content-container__text');
 const skillContainer = document.getElementById('content-container__skills');
 const contentDivider = document.getElementById('content-container__divider');
 const contentContainer = document.getElementById('content-container');
@@ -69,6 +70,8 @@ const showSkillBars = () => {
 			contentDivider.classList.add('bar-right-animation');
 			const tl = gsap.timeline({repeat: 0, repeatDelay: 0});
 			tl	
+				.to('.content-container__text', 0, {'max-height': `${textContainer.offsetHeight}px`})
+				.to('.content-container__text p', 0, {'min-width': `${textContainer.offsetWidth}px`})
 				.to('.content-container__text', 0.6, {width: '0vw', ease: Power3.easeInOut})
 				.fromTo('#content-container__skills', 0.6, {width: '0'}, {width: '80vw', ease: Power3.easeInOut}, "-=0.6")
 		}
@@ -209,8 +212,8 @@ skillContainer.addEventListener('mouseleave', hideSkillBars);
 let touchYStart = undefined;
 
 contentContainer.addEventListener('touchmove', (ev) => {
-	if (!touchYStart) touchYStart = ev.touches[0].pageY;
-	const touchYDelta = touchYStart - ev.touches[0].pageY;
+	if (!touchYStart) touchYStart = ev.touches[0].screenY;
+	const touchYDelta = touchYStart - ev.touches[0].screenY;
 	console.log(touchYDelta)
 	if (touchYDelta > 0) {
 		if (skillsAreShown) {
