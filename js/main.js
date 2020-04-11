@@ -11,6 +11,7 @@ const greetingContainer = document.getElementById('greeting-container')
 
 const skillContainer = document.getElementById('content-container__skills');
 const contentDivider = document.getElementById('content-container__divider');
+const contentContainer = document.getElementById('content-container');
 
 // global variables
 let hasSaidHello = false;
@@ -86,22 +87,26 @@ const showSkillBars = () => {
 const hideSkillBars = () => {
 	if (window.innerWidth < 700) {
 		if (skillsAreShown) {
-			skillsAreShown = false;
 			contentDivider.classList.remove('bar-right-animation');
 			contentDivider.classList.add('bar-left-animation');
 			const tl = gsap.timeline({repeat: 0, repeatDelay: 0});
 			tl	
 			.to('.content-container__text', 0.6, {width: '500px', ease: Power3.easeInOut})
 			.fromTo('#content-container__skills', 0.6, {width: '80vw'}, {width: '0', ease: Power3.easeInOut}, "-=0.6")
+			setTimeout(() => {
+				skillsAreShown = false;
+			}, 600);
 		}
 	} else {
 		if (skillsAreShown) {
-			skillsAreShown = false;
 			contentDivider.classList.remove('bar-right-animation');
 			contentDivider.classList.add('bar-left-animation');
 			const tl = gsap.timeline({repeat: 0, repeatDelay: 0});
 			tl	
 				.fromTo('#content-container__skills', 0.6, {width: '40vw'}, {width: '0', ease: Power3.easeInOut})
+			setTimeout(() => {
+				skillsAreShown = false;
+			}, 600);
 		}
 	}
 }
@@ -201,10 +206,25 @@ nameSubText.addEventListener('touch', () => {
 contentDivider.addEventListener('mouseover', showSkillBars);
 skillContainer.addEventListener('mouseleave', hideSkillBars);
 
-contentDivider.addEventListener('touch', () => {
-	if (skillsAreShown) {
-		hideSkillBars();
-	} else {
-		showSkillBars();
+let touchYStart = undefined;
+
+contentContainer.addEventListener('touchmove', (ev) => {
+	if (!touchYStart) touchYStart = ev.touches[0].pageY;
+	const touchYDelta = touchYStart - ev.touches[0].pageY;
+	console.log(touchYDelta)
+	if (touchYDelta > 0) {
+		if (skillsAreShown) {
+			hideSkillBars();
+			touchYstart = undefined;
+		}
+	} else if (touchYDelta <  0) {
+		if (!skillsAreShown){
+			showSkillBars();
+			touchYstart = undefined;
+		} 
 	}
 });
+
+contentContainer.addEventListener('touchend', () => {
+	touchYStart = undefined;
+})
