@@ -153,7 +153,7 @@ window.mobileAndTabletcheck = function() {
 const pageScroller = new PageScroller('page-scroller', 400);
 
 pageScroller.set({
-	dragTreshold: 0.3,
+	dragTreshold: 0.15,
 	reset: 'true',
 	whileTransitioning : 
 		[
@@ -237,7 +237,7 @@ let touchYStart = undefined;
 contentContainer.addEventListener('touchmove', (ev) => {
 	if (!touchYStart) touchYStart = ev.touches[0].screenY;
 	const touchYDelta = touchYStart - ev.touches[0].screenY;
-	if (touchYDelta > 0) {
+	if (touchYDelta >= 0) {
 		if (skillsAreShown) {
 			hideSkillBars();
 			touchYstart = undefined;
