@@ -162,20 +162,17 @@ window.addEventListener('scroll', ()=> {
 window.addEventListener('touchmove', ()=> {
 	const newInnerHTML = 'Oh, I should introduce myself properly...'
 	const clickMeButton = document.getElementById('landing-name__subtext');
-	if (window.pageYOffset + 100 > window.innerHeight / 2) {
+	if (window.pageYOffset + 100 > window.innerHeight / 2 && !hasSaidHello) {
 		nameElement.innerHTML = newInnerHTML;
 		nameElement.classList.add('landing-name__text--transformed');
 		clickMeButton.style.display = 'inherit';
-	} else if (nameElement.innerHTML === newInnerHTML) {
+	} else if (nameElement.innerHTML === newInnerHTML && !hasSaidHello) {
 		nameElement.innerHTML = 'Hans Vertriest';
 		nameElement.classList.remove('landing-name__text--transformed');
 		clickMeButton.style.display = 'none';
 	
 		nameContainer.style.opacity = '1';
-		nameContainer.style.display = 'inherit';
 	}
-	nameContainer.style.left = `${(((window.innerWidth) / 2) -( nameContainer.offsetWidth / 2)) }px`;
-	nameContainer.style.top = `${(((window.innerHeight) / 2) -( nameContainer.offsetHeight / 2)) }px`;
 })
 
 nameSubText.addEventListener('click', () => {
@@ -205,7 +202,6 @@ contentDivider.addEventListener('mouseover', showSkillBars);
 skillContainer.addEventListener('mouseleave', hideSkillBars);
 
 contentDivider.addEventListener('touch', () => {
-	console.log('ddd');
 	if (skillsAreShown) {
 		hideSkillBars();
 	} else {

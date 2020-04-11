@@ -60,6 +60,7 @@
 	display: flex;
 	align-items: stretch;
 	justify-content: center;
+	max-width: 80vw;
 }
 
 .content-container__text {
@@ -118,11 +119,15 @@
 
 @media only screen and (max-width: 700px) {
 	.greeting__text {
-		font-size: 5em;
+		font-size: 4.5em;
 	}
 	.greeting__text--big-yellow {
 		color: var(--yellow);
 		font-size: 8em;
+	}
+
+	.content-container__text {
+		font-size: 1em;
 	}
 }
 
