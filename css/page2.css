@@ -4,6 +4,11 @@
 	position:relative;
 }
 
+/* #introduction-container {
+	position : absolute;
+	top: '500px';
+} */
+
 #introduction {
 	height: 100vh;
 	display:flex;

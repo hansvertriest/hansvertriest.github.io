@@ -15,9 +15,12 @@ canvas {
 }
 
 #landing-name__text {
+	position:fixed;
 	font-size: 3em;
 	font-family: 'Oswald', cursive;
 	cursor: auto;
+
+	transition: bottom 1s;
 }
 
 

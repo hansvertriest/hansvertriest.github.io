@@ -21,11 +21,15 @@ let bgPosY = -50;
 let fgPosY = -120;
 
 const parallaxDown = () => {
+	const tl = gsap.timeline({repeat: 0, repeatDelay: 0});
+	tl.fromTo('#introduction-container', 0.5, {y: `-${window.innerHeight}`, ease: Power2.easeOut}, {y: '0'})	
 	bg.style.bottom = `${bgPosY+120}px`
 	fg.style.bottom = `${fgPosY}px`
 }
 
 const parallaxUp = () => {
+	const tl = gsap.timeline({repeat: 0, repeatDelay: 0});
+	tl.fromTo('#introduction-container', 0.5, {y: '0'}, {y: `-${window.innerHeight}`})
 	bg.style.bottom = `${bgPosY+10}px`
 	fg.style.bottom = `${fgPosY}px`
 }
@@ -150,36 +154,25 @@ pageScroller.set({
 onResize();
 window.addEventListener('resize', onResize);
 
-// window.addEventListener('scroll', ()=> {
-// 	const clickMeButton = document.getElementById('introduction__subtext');
-// 	// if (window.pageYOffset + 100 > window.innerHeight / 2 && !hasSaidHello) {
-// 	// 	nameElement.innerHTML = newInnerHTML;
-// 	// 	nameElement.classList.add('landing-name__text--transformed');
-// 	// 	clickMeButton.style.display = 'inherit';
-// 	// } else if (nameElement.innerHTML === newInnerHTML && !hasSaidHello) {
-// 	// 	nameElement.innerHTML = 'Hans Vertriest';
-// 	// 	nameElement.classList.remove('landing-name__text--transformed');
-// 	// 	clickMeButton.style.display = 'none';
-	
-// 	// 	nameContainer.style.opacity = '1';
-// 	// }
-// })
+window.addEventListener('scroll', ()=> {
+	const name = document.getElementById('landing-name');
+	if (window.pageYOffset + 100 > window.innerHeight / 2) {
+		name.style.display = 'none';
+	} else if (window.pageYOffset + 100 < window.innerHeight / 2) {
+		name.style.display = 'flex';
 
-// window.addEventListener('touchmove', ()=> {
-// 	const newInnerHTML = 'Oh, I should introduce myself properly...'
-// 	const clickMeButton = document.getElementById('landing-name__subtext');
-// 	if (window.pageYOffset + 100 > window.innerHeight / 2 && !hasSaidHello) {
-// 		nameElement.innerHTML = newInnerHTML;
-// 		nameElement.classList.add('landing-name__text--transformed');
-// 		clickMeButton.style.display = 'inherit';
-// 	} else if (nameElement.innerHTML === newInnerHTML && !hasSaidHello) {
-// 		nameElement.innerHTML = 'Hans Vertriest';
-// 		nameElement.classList.remove('landing-name__text--transformed');
-// 		clickMeButton.style.display = 'none';
-	
-// 		nameContainer.style.opacity = '1';
-// 	}
-// })
+	}
+})
+
+window.addEventListener('touchmove', ()=> {
+	const name = document.getElementById('landing-name');
+	if (window.pageYOffset + 100 > window.innerHeight / 2) {
+		name.style.display = 'none';
+	} else if (window.pageYOffset  < window.innerHeight / 2) {
+		name.style.display = 'flex';
+
+	}
+})
 
 introductionSubText.addEventListener('click', () => {
 	hasSaidHello = true;
