@@ -22,7 +22,7 @@ let fgPosY = -120;
 
 const parallaxDown = () => {
 	const tl = gsap.timeline({repeat: 0, repeatDelay: 0});
-	tl.fromTo('#introduction-container', 0.5, {y: `-${window.innerHeight}`, ease: Power2.easeOut}, {y: '0'})	
+	tl.fromTo('#introduction-container', 0.55, {y: `-${window.innerHeight}`, ease: Power3.easeOut}, {y: '0'})	
 	bg.style.bottom = `${bgPosY+120}px`
 	fg.style.bottom = `${fgPosY}px`
 }
@@ -42,13 +42,13 @@ const onResize = () => {
 const animatePage2 = () => {
 	const tl = gsap.timeline({repeat: 0, repeatDelay: 0});
 	tl
-		.to("#greeting-hi", 0.8, {opacity: '1', ease: Power3.easeIn})
-		.fromTo("#greeting-hi", 0.6, {x: '-10%'}, {x: '0', ease: Power3.easeIn}, "-=0.6")
+		.to("#greeting-hi", 0.6, {opacity: '1', ease: Power3.easeIn})
+		.fromTo("#greeting-hi", 0.8, {x: '-15%'}, {x: '0', ease: Power3.easeIn}, "-=0.6")
 
-		.to("#greeting-my-name", 0.4, {opacity: '1', ease: Power3.easeIn}, 0.8)
-		.fromTo("#greeting-my-name", 0.8, {y: `${greetingMyName.offsetHeight}px`}, {y: `0`, ease: Power2.easeIn}, "-=0.6")
+		.to("#greeting-my-name", 0.4, {opacity: '1', ease: Power3.easeIn}, 1)
+		.fromTo("#greeting-my-name", 0.4, {y: `${greetingMyName.offsetHeight}px`}, {y: `0`, ease: Power2.easeIn}, "-=0.6")
 
-		.to("#greeting-name", 0, {opacity: '1', ease: Power3.easeIn})
+		.to("#greeting-name", 0, {opacity: '1', ease: Power3.easeIn}, 0.4)
 		.fromTo("#greeting-name", 0.6, {width: '0'}, {width: `${greetingName.offsetWidth}px`, ease: Power2.easeIn})
 
 		.to("#greeting-hi", 0.8, {opacity: '0', ease: Power3.easeInOut}, 2.5)
@@ -59,8 +59,35 @@ const animatePage2 = () => {
 		
 		.to("#greeting-name", 0.4, {y: `-${greetingName.offsetTop - greetingContainer.offsetTop + window.innerHeight * 0.1}`, ease: Power3.easeInOut})
 		
-		.fromTo("#content-container", 0.6, {opacity: '0'}, {opacity: '1', ease: Power3.easeInOut}, "+=0.4")
+		
+		.to("#content-container", 0, {display: 'flex'})
+		.fromTo("#content-container", 0.6, {opacity: '0'}, {opacity: '1', ease: Power3.easeInOut}, "+=0.3")
 		.fromTo("#content-container", 0.8, {x: '35%'}, {x: '0', ease: Power3.easeInOut}, '-=0.6')
+		hasSaidHello = true;
+}
+
+const introductionPageLeave = () => {
+	if (hasSaidHello) {
+		const tl = gsap.timeline({repeat: 0, repeatDelay: 0});
+		tl
+			.to("#greeting-name", 0.4, {x: `-${greetingName.offsetTop - greetingContainer.offsetTop + window.innerHeight * 0.1}`, ease: Power3.easeIn})
+			.fromTo("#greeting-name", 0.4, {opacity: '1'}, {opacity: '0', ease: Power3.easeInOut}, "-=0.4")
+			
+			.fromTo("#content-container", 0.4, {opacity: '1'}, {opacity: '0', ease: Power3.easeInOut}, "-=0.4")
+			.fromTo("#content-container", 0.4, {x: '0%'}, {x: '35%', ease: Power3.easeInOut}, '-=0.4')
+	}
+}
+
+const introductionPageEnter = () => {
+	if (hasSaidHello) {
+		const tl = gsap.timeline({repeat: 0, repeatDelay: 0});
+		tl
+			.to("#greeting-name", 0.6, {x: `0`, ease: Power3.easeInOut})
+			.fromTo("#greeting-name", 0.6, {opacity: '0', ease: Power3.easeInOut}, {opacity: '1'}, "-=0.6")
+			
+			.fromTo("#content-container", 0.6, {opacity: '0', ease: Power3.easeInOut}, {opacity: '1'}, "-=0.6")
+			.fromTo("#content-container", 0.6, {x: '35%', ease: Power3.easeInOut}, {x: '0%'},   '-=0.6')
+	}
 }
 
 let skillsAreShown = false;
@@ -139,16 +166,24 @@ pageScroller.set({
 				from: '1',
 				to: '0',
 				callback: () => parallaxUp(),
+			},
+			{
+				from: '1',
+				to: '2',
+				callback: () => introductionPageLeave(),
+			},
+			{
+				from: '2',
+				to: '1',
+				callback: () => introductionPageEnter(),
 			}
 		],
-		
 	easingForAll : {
 		from: '1',
 		to: '2',
 		func: (window.mobileAndTabletcheck) ? 'easeOutCubic': 'easeInOutCubic',
-	}
-	}
-);
+	},
+});
 
 // ===== Page-1
 onResize();
@@ -156,9 +191,9 @@ window.addEventListener('resize', onResize);
 
 window.addEventListener('scroll', ()=> {
 	const name = document.getElementById('landing-name');
-	if (window.pageYOffset + 100 > window.innerHeight / 2) {
+	if (window.pageYOffset + 110 > window.innerHeight / 2) {
 		name.style.display = 'none';
-	} else if (window.pageYOffset + 100 < window.innerHeight / 2) {
+	} else if (window.pageYOffset + 110 < window.innerHeight / 2) {
 		name.style.display = 'flex';
 
 	}
@@ -175,7 +210,6 @@ window.addEventListener('touchmove', ()=> {
 })
 
 introductionSubText.addEventListener('click', () => {
-	hasSaidHello = true;
 	const animationLength = 0.7;
 	introductionContainer.style.transition = `opacity ${animationLength}s`;
 	introductionContainer.style.opacity = '0';
@@ -186,8 +220,6 @@ introductionSubText.addEventListener('click', () => {
 })
 
 introductionSubText.addEventListener('touch', () => {
-	console.log("dd")
-	hasSaidHello = true;
 	const animationLength = 0.7;
 	introductionContainer.style.transition = `opacity ${animationLength}s`;
 	introductionContainer.style.opacity = '0';
