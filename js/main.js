@@ -42,7 +42,6 @@ const animatePage2 = () => {
 
 		.to("#greeting-my-name", 0.4, {opacity: '1', ease: Power3.easeIn}, 0.8)
 		.fromTo("#greeting-my-name", 0.8, {y: `${greetingMyName.offsetHeight}px`}, {y: `0`, ease: Power2.easeIn}, "-=0.6")
-		// .fromTo("#greeting-my-name", 0.8, {height: '0'}, {height: `${greetingMyName.offsetHeight}px`, ease: Power2.easeIn})
 
 		.to("#greeting-name", 0, {opacity: '1', ease: Power3.easeIn})
 		.fromTo("#greeting-name", 0.6, {width: '0'}, {width: `${greetingName.offsetWidth}px`, ease: Power2.easeIn})
@@ -54,6 +53,7 @@ const animatePage2 = () => {
 		.fromTo("#greeting-my-name", 0.8, {x: '0'}, {x: '-35%', ease: Power3.easeInOut}, '-=0.8')
 		
 		.to("#greeting-name", 0.4, {y: `-${greetingName.offsetTop - greetingContainer.offsetTop + window.innerHeight * 0.1}`, ease: Power3.easeInOut})
+		
 
 }
 
