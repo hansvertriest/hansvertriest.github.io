@@ -33,7 +33,7 @@ class PageScroller {
 		this.setTransitionFunctions();
 
 		this.scrolling = false;
-		this.scrollDuration = 650;
+		this.scrollDuration = 1000;
 
 		this.setPageStyling();
 

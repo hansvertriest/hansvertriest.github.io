@@ -3,7 +3,7 @@ canvas {
 }
 
 #landing-name {
-	position: fixed;
+	position: absolute;
 	z-index: 1;
 	color: var(--yellow);
 	height: 100vh;
@@ -20,11 +20,6 @@ canvas {
 	cursor: auto;
 }
 
-.landing-name__text--transformed {
-	color: var(--red);
-	font-size: 2em;
-	text-align: center;
-}
 
 #landing-name__subtext {
 	display: none;
@@ -40,12 +35,6 @@ canvas {
 	animation-timing-function: ease-in-out;
 }
 
-@keyframes bounce-3 {
-	0%   { transform: translateY(0); }
-	30%  { transform: translateY(-10px); }
-	50%  { transform: translateY(0); }
-	100% { transform: translateY(0); }
-}
 
 @media only screen and (max-width: 700px) {
 	#landing-name__text {
@@ -85,7 +74,7 @@ canvas {
 	min-width: 100vw;
 	position: absolute;
 	bottom: -50px;
-	transition: bottom 0.7s;
+	transition: bottom 1s;
 }
 
 #landing-mountains__fg {

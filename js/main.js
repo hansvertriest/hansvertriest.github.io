@@ -1,9 +1,9 @@
 const bg = document.getElementById('landing-mountains__bg');
 const fg = document.getElementById('landing-mountains__fg');
-const nameContainer = document.getElementById('landing-name');
-const nameElement = document.getElementById('landing-name__text');
-const nameSubText = document.getElementById('landing-name__subtext');
 
+const introductionContainer = document.getElementById('introduction');
+const nameElement = document.getElementById('landing-name__text');
+const introductionSubText = document.getElementById('introduction__subtext');
 const greetingHi = document.getElementById('greeting-hi');
 const greetingMyName = document.getElementById('greeting-my-name');
 const greetingName = document.getElementById('greeting-name');
@@ -38,7 +38,7 @@ const onResize = () => {
 const animatePage2 = () => {
 	const tl = gsap.timeline({repeat: 0, repeatDelay: 0});
 	tl
-		.to("#greeting-hi", 0.6, {opacity: '1', ease: Power3.easeIn})
+		.to("#greeting-hi", 0.8, {opacity: '1', ease: Power3.easeIn})
 		.fromTo("#greeting-hi", 0.6, {x: '-10%'}, {x: '0', ease: Power3.easeIn}, "-=0.6")
 
 		.to("#greeting-my-name", 0.4, {opacity: '1', ease: Power3.easeIn}, 0.8)
@@ -55,7 +55,6 @@ const animatePage2 = () => {
 		
 		.to("#greeting-name", 0.4, {y: `-${greetingName.offsetTop - greetingContainer.offsetTop + window.innerHeight * 0.1}`, ease: Power3.easeInOut})
 		
-		.to("#content-container", 0, {visibility: 'auto'})
 		.fromTo("#content-container", 0.6, {opacity: '0'}, {opacity: '1', ease: Power3.easeInOut}, "+=0.4")
 		.fromTo("#content-container", 0.8, {x: '35%'}, {x: '0', ease: Power3.easeInOut}, '-=0.6')
 }
@@ -70,7 +69,7 @@ const showSkillBars = () => {
 			contentDivider.classList.add('bar-right-animation');
 			const tl = gsap.timeline({repeat: 0, repeatDelay: 0});
 			tl	
-				.to('.content-container__text', 0, {'max-height': `${textContainer.offsetHeight}px`})
+				.to('.content-container__text', 0, {'max-height': `${textContainer.offsetHeight}px`, 'min-height': `${textContainer.offsetHeight}px`})
 				.to('.content-container__text p', 0, {'min-width': `${textContainer.offsetWidth}px`})
 				.to('.content-container__text', 0.6, {width: '0vw', ease: Power3.easeInOut})
 				.fromTo('#content-container__skills', 0.6, {width: '0'}, {width: '80vw', ease: Power3.easeInOut}, "-=0.6")
@@ -82,7 +81,7 @@ const showSkillBars = () => {
 			contentDivider.classList.remove('bar-left-animation');
 			const tl = gsap.timeline({repeat: 0, repeatDelay: 0});
 			tl	
-				.fromTo('#content-container__skills', 0.6, {width: '0'}, {width: '40vw', ease: Power3.easeInOut})
+				.fromTo('#content-container__skills', 0.6, {width: '0'}, {width: '20vw', ease: Power3.easeInOut})
 		}
 	}
 }
@@ -106,7 +105,7 @@ const hideSkillBars = () => {
 			contentDivider.classList.add('bar-left-animation');
 			const tl = gsap.timeline({repeat: 0, repeatDelay: 0});
 			tl	
-				.fromTo('#content-container__skills', 0.6, {width: '40vw'}, {width: '0', ease: Power3.easeInOut})
+				.fromTo('#content-container__skills', 0.6, {width: '20vw'}, {width: '0', ease: Power3.easeInOut})
 			setTimeout(() => {
 				skillsAreShown = false;
 			}, 600);
@@ -120,7 +119,7 @@ window.mobileAndTabletcheck = function() {
 	return check;
   };
 
-const pageScroller = new PageScroller('page-scroller', 300);
+const pageScroller = new PageScroller('page-scroller', 400);
 
 pageScroller.set({
 	dragTreshold: 0.3,
@@ -151,57 +150,56 @@ pageScroller.set({
 onResize();
 window.addEventListener('resize', onResize);
 
-window.addEventListener('scroll', ()=> {
-	const newInnerHTML = 'Oh, I should introduce myself properly...'
-	const clickMeButton = document.getElementById('landing-name__subtext');
-	if (window.pageYOffset + 100 > window.innerHeight / 2 && !hasSaidHello) {
-		nameElement.innerHTML = newInnerHTML;
-		nameElement.classList.add('landing-name__text--transformed');
-		clickMeButton.style.display = 'inherit';
-	} else if (nameElement.innerHTML === newInnerHTML && !hasSaidHello) {
-		nameElement.innerHTML = 'Hans Vertriest';
-		nameElement.classList.remove('landing-name__text--transformed');
-		clickMeButton.style.display = 'none';
+// window.addEventListener('scroll', ()=> {
+// 	const clickMeButton = document.getElementById('introduction__subtext');
+// 	// if (window.pageYOffset + 100 > window.innerHeight / 2 && !hasSaidHello) {
+// 	// 	nameElement.innerHTML = newInnerHTML;
+// 	// 	nameElement.classList.add('landing-name__text--transformed');
+// 	// 	clickMeButton.style.display = 'inherit';
+// 	// } else if (nameElement.innerHTML === newInnerHTML && !hasSaidHello) {
+// 	// 	nameElement.innerHTML = 'Hans Vertriest';
+// 	// 	nameElement.classList.remove('landing-name__text--transformed');
+// 	// 	clickMeButton.style.display = 'none';
 	
-		nameContainer.style.opacity = '1';
-	}
-})
+// 	// 	nameContainer.style.opacity = '1';
+// 	// }
+// })
 
-window.addEventListener('touchmove', ()=> {
-	const newInnerHTML = 'Oh, I should introduce myself properly...'
-	const clickMeButton = document.getElementById('landing-name__subtext');
-	if (window.pageYOffset + 100 > window.innerHeight / 2 && !hasSaidHello) {
-		nameElement.innerHTML = newInnerHTML;
-		nameElement.classList.add('landing-name__text--transformed');
-		clickMeButton.style.display = 'inherit';
-	} else if (nameElement.innerHTML === newInnerHTML && !hasSaidHello) {
-		nameElement.innerHTML = 'Hans Vertriest';
-		nameElement.classList.remove('landing-name__text--transformed');
-		clickMeButton.style.display = 'none';
+// window.addEventListener('touchmove', ()=> {
+// 	const newInnerHTML = 'Oh, I should introduce myself properly...'
+// 	const clickMeButton = document.getElementById('landing-name__subtext');
+// 	if (window.pageYOffset + 100 > window.innerHeight / 2 && !hasSaidHello) {
+// 		nameElement.innerHTML = newInnerHTML;
+// 		nameElement.classList.add('landing-name__text--transformed');
+// 		clickMeButton.style.display = 'inherit';
+// 	} else if (nameElement.innerHTML === newInnerHTML && !hasSaidHello) {
+// 		nameElement.innerHTML = 'Hans Vertriest';
+// 		nameElement.classList.remove('landing-name__text--transformed');
+// 		clickMeButton.style.display = 'none';
 	
-		nameContainer.style.opacity = '1';
-	}
-})
+// 		nameContainer.style.opacity = '1';
+// 	}
+// })
 
-nameSubText.addEventListener('click', () => {
+introductionSubText.addEventListener('click', () => {
 	hasSaidHello = true;
 	const animationLength = 0.7;
-	nameContainer.style.transition = `opacity ${animationLength}s`;
-	nameContainer.style.opacity = '0';
+	introductionContainer.style.transition = `opacity ${animationLength}s`;
+	introductionContainer.style.opacity = '0';
 	setTimeout(() => {
-		nameContainer.style.display = 'none';
+		introductionContainer.style.display = 'none';
 	}, animationLength * 1000)
 	animatePage2();
 })
 
-
-nameSubText.addEventListener('touch', () => {
+introductionSubText.addEventListener('touch', () => {
+	console.log("dd")
 	hasSaidHello = true;
 	const animationLength = 0.7;
-	nameContainer.style.transition = `opacity ${animationLength}s`;
-	nameContainer.style.opacity = '0';
+	introductionContainer.style.transition = `opacity ${animationLength}s`;
+	introductionContainer.style.opacity = '0';
 	setTimeout(() => {
-		nameContainer.style.display = 'none';
+		introductionContainer.style.display = 'none';
 	}, animationLength * 1000)
 	animatePage2();
 });
@@ -214,7 +212,6 @@ let touchYStart = undefined;
 contentContainer.addEventListener('touchmove', (ev) => {
 	if (!touchYStart) touchYStart = ev.touches[0].screenY;
 	const touchYDelta = touchYStart - ev.touches[0].screenY;
-	console.log(touchYDelta)
 	if (touchYDelta > 0) {
 		if (skillsAreShown) {
 			hideSkillBars();
