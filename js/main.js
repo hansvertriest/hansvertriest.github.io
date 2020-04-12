@@ -67,8 +67,8 @@ const animatePage2 = () => {
 }
 
 const introductionPageLeave = () => {
+	const tl = gsap.timeline({repeat: 0, repeatDelay: 0});
 	if (hasSaidHello) {
-		const tl = gsap.timeline({repeat: 0, repeatDelay: 0});
 		tl
 			.to("#greeting-name", 0.4, {x: `-${greetingName.offsetTop - greetingContainer.offsetTop + window.innerHeight * 0.1}`, ease: Power3.easeIn})
 			.fromTo("#greeting-name", 0.4, {opacity: '1'}, {opacity: '0', ease: Power3.easeInOut}, "-=0.4")
@@ -76,9 +76,16 @@ const introductionPageLeave = () => {
 			.fromTo("#content-container", 0.4, {opacity: '1'}, {opacity: '0', ease: Power3.easeInOut}, "-=0.4")
 			.fromTo("#content-container", 0.4, {x: '0%'}, {x: '35%', ease: Power3.easeInOut}, '-=0.4')
 	}
+	tl 
+	.to("#projects__title", 0.6, {x: `0`, ease: Power3.easeInOut}, (hasSaidHello) ? '-=0.4' : 0)
+	.fromTo("#projects__title", 0.6, {opacity: '0', ease: Power3.easeInOut}, {opacity: '1'}, "-=0.6")
+	
+	.fromTo("#projects-preview-container", 0.6, {opacity: '0', ease: Power3.easeInOut}, {opacity: '1'}, "-=0.6")
+	.fromTo("#projects-preview-container", 0.6, {x: '35%', ease: Power3.easeInOut}, {x: '0%'},   '-=0.6')
 }
 
 const introductionPageEnter = () => {
+	const tl = gsap.timeline({repeat: 0, repeatDelay: 0});
 	if (hasSaidHello) {
 		const tl = gsap.timeline({repeat: 0, repeatDelay: 0});
 		tl
@@ -88,6 +95,14 @@ const introductionPageEnter = () => {
 			.fromTo("#content-container", 0.6, {opacity: '0', ease: Power3.easeInOut}, {opacity: '1'}, "-=0.6")
 			.fromTo("#content-container", 0.6, {x: '35%', ease: Power3.easeInOut}, {x: '0%'},   '-=0.6')
 	}
+	tl
+
+	.to("#projects__title", 0.4, {x: `-${greetingName.offsetTop - greetingContainer.offsetTop + window.innerHeight * 0.1}`, ease: Power3.easeIn}, (hasSaidHello) ? '-=0.4' : 0)
+	.fromTo("#projects__title", 0.4, {opacity: '1'}, {opacity: '0', ease: Power3.easeInOut}, "-=0.4")
+	
+	.fromTo("#projects-preview-container", 0.4, {opacity: '1'}, {opacity: '0', ease: Power3.easeInOut}, "-=0.4")
+	.fromTo("#projects-preview-container", 0.4, {x: '0%'}, {x: '35%', ease: Power3.easeInOut}, '-=0.4')
+
 }
 
 let skillsAreShown = false;

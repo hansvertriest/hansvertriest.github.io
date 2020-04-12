@@ -1,0 +1,173 @@
+.page-3 {
+	background-color: var(--bg-color);
+}
+
+.page-3-container {
+	position:relative;
+	min-width: 100vw;
+	min-height: 100vh;
+}
+
+.projects-container {
+	position: absolute;
+	top: 0;
+	left: 0;
+}
+
+.projects-preview-container {
+	height: 100%;
+	width: 100%;
+}
+
+.projects__title {
+	font-size: 8em;
+	font-family: var(--title-font);
+	margin: 5% 10%;
+	font-weight: 500;
+	line-height: 1em;
+}
+
+.projects__title--big-yellow {
+	color: var(--yellow);
+	font-size: 14em;
+}
+
+/* page preview */
+.card {
+	display: flex;
+	flex-direction: column;
+	overflow: hidden
+}
+
+.projects-preview-container {
+	margin-top: 10vh;
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: center;
+	width: 100vw;
+}
+
+.space-infection-preview, .shopthedot-preview, .sharetevelde-preview {
+	width: 25vw;
+	min-width: 300px;
+	height: 300px;
+	margin: 20px;
+	background-color: white;
+	cursor: pointer;
+	display:flex;
+	justify-content: center;
+	align-items: center;
+	transition: filter 0.7s ease-in;
+	transition: transform 0.7s ease-in;
+}
+
+.view-more{
+	font-family: var(--title-font);
+	text-decoration: none;
+	color: var(--red);
+	font-size: 2em;
+	opacity: 0;
+	text-align: center;
+	position: relative;
+
+	transition: opacity 0.4s;
+	transition: top 0.4s;
+
+	background-color: var(--bg-color)
+}
+
+.card:hover .space-infection-preview, .card:hover .shopthedot-preview, .card:hover .sharetevelde-preview {
+	filter: sepia(150%);
+	filter: blur(5px);
+}
+
+.card:hover .view-more {
+	opacity: 1;
+	top: -50%;
+}
+
+.space-infection-preview {
+	background-image: url('../images/space.png');
+	background-size: cover;
+	background-position: center center;
+}
+
+.shopthedot-preview {
+	background-image: url('../images/shop.png');
+	background-size: cover;
+	background-position: center center;
+}
+
+.sharetevelde-preview {
+	background-image: url('../images/share.png');
+	background-size: cover;
+	background-position: center center;
+}
+
+.github-container {
+	width: 100%;
+	display: flex;
+	flex-direction: row;
+	justify-content: center;
+	align-items: center,
+}
+
+.github-link {
+	text-decoration: none;
+	color: var(--white);
+	font-family: var(--text-font);
+	display:flex;
+	align-items: center;
+	flex-direction: column;
+}
+
+.github-link img {
+	width: 40px;
+	height: 40px;
+}
+
+.github-link:hover {
+	color: var(--red);
+}
+
+@media only screen and (max-width: 649px) {
+	.space-infection-preview, .shopthedot-preview, .sharetevelde-preview {
+		width: 100%;
+		margin-left: 0;
+		margin-right: 0;
+		height: 200px;
+	}
+	.projects__title {
+		font-size: 5em;
+	}
+}
+
+@media only screen and (min-width: 650px) and  (max-width: 900px) {
+	.projects__title {
+		font-size: 7em;
+	}
+	.space-infection-preview, .shopthedot-preview, .sharetevelde-preview {
+		max-height: 200px;
+	}
+}
+
+@media only screen and (min-width: 900px) and (max-width: 1200px) {
+	.projects__title {
+		font-size: 7em;
+	}
+	.space-infection-preview, .shopthedot-preview, .sharetevelde-preview {
+		max-height: 200px;
+	}
+}
+
+@media only screen and (min-width: 1200px) {
+
+}
+
+
+@keyframes bounce-left {
+	0%   { transform: translateX(0); }
+	30%  { transform: translateX(-8px); }
+	40%  { transform: translateX(0); }
+	100% { transform: translateX(0); }
+}

@@ -1,6 +1,7 @@
 @import './variables.css';
 @import './landing.css';
 @import './page2.css';
+@import './page3.css';
 
 body {
 	overflow: hidden;

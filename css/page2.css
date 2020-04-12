@@ -100,7 +100,7 @@
 	align-items: stretch;
 	justify-content: center;
 	max-width: 80vw;
-	
+	margin-top: 10vh;	
 }
 
 .content-container__text {
