@@ -78,11 +78,11 @@ const introductionPageLeave = () => {
 			.fromTo("#content-container", 0.4, {x: '0%'}, {x: '35%', ease: Power3.easeInOut}, '-=0.4')
 	}
 	tl 
-	.to("#projects__title", 0.6, {x: `0`, ease: Power3.easeInOut}, (hasSaidHello) ? '-=0.4' : 0)
-	.fromTo("#projects__title", 0.6, {opacity: '0', ease: Power3.easeInOut}, {opacity: '1'}, "-=0.6")
-	
-	.fromTo("#projects-preview-container", 0.6, {opacity: '0', ease: Power3.easeInOut}, {opacity: '1'}, "-=0.6")
-	.fromTo("#projects-preview-container", 0.6, {x: '35%', ease: Power3.easeInOut}, {x: '0%'},   '-=0.6')
+	.fromTo("#work__title", 0.6,{x: `-${greetingName.offsetTop - greetingContainer.offsetTop + window.innerHeight * 0.1}`}, {x: `0`, ease: Power3.easeInOut}, (hasSaidHello) ? '-=0.4' : 0)
+	.fromTo("#work__title", 0.6, {opacity: '0', ease: Power3.easeInOut}, {opacity: '1'}, "-=0.6")
+
+	.fromTo("#study-container", 0.4, {x: `-${greetingName.offsetTop - greetingContainer.offsetTop + window.innerHeight * 0.1}`, ease: Power3.easeIn}, {x: 0},   '-=0.6')
+	.fromTo("#work-container", 0.4, {x: `${greetingName.offsetTop - greetingContainer.offsetTop + window.innerHeight * 0.1}`, ease: Power3.easeIn}, {x: 0},   '-=0.6')
 }
 
 const introductionPageEnter = () => {
@@ -98,18 +98,46 @@ const introductionPageEnter = () => {
 	}
 	tl
 
-	.to("#projects__title", 0.4, {x: `-${greetingName.offsetTop - greetingContainer.offsetTop + window.innerHeight * 0.1}`, ease: Power3.easeIn}, (hasSaidHello) ? '-=0.4' : 0)
-	.fromTo("#projects__title", 0.4, {opacity: '1'}, {opacity: '0', ease: Power3.easeInOut}, "-=0.4")
+	.to("#work__title", 0.4, {x: `-${greetingName.offsetTop - greetingContainer.offsetTop + window.innerHeight * 0.1}`, ease: Power3.easeIn}, (hasSaidHello) ? '-=0.4' : 0)
+	.fromTo("#work__title", 0.4, {opacity: '1'}, {opacity: '0', ease: Power3.easeInOut}, "-=0.4")
+	
+	.fromTo("#study-container", 0.4, {x: 0}, {x: `-${greetingName.offsetTop - greetingContainer.offsetTop + window.innerHeight * 0.1}`, ease: Power3.easeIn},   '-=0.6')
+	.fromTo("#work-container", 0.4, {x: 0}, {x: `${greetingName.offsetTop - greetingContainer.offsetTop + window.innerHeight * 0.1}`, ease: Power3.easeIn},   '-=0.6')
+
+}
+
+const pojectsPageEnter = () => {
+	const tl = gsap.timeline({repeat: 0, repeatDelay: 0});
+	tl
+
+	.to("#work__title", 0.4, {x: `-${greetingName.offsetTop - greetingContainer.offsetTop + window.innerHeight * 0.1}`, ease: Power3.easeIn})
+	.fromTo("#work__title", 0.4, {opacity: '1'}, {opacity: '0', ease: Power3.easeInOut}, "-=0.4")
+	
+	.fromTo("#projects-preview-container", 0.6, {opacity: '0', ease: Power3.easeInOut}, {opacity: '1'}, "-=0.6")
+	.fromTo("#projects-preview-container", 0.6, {x: '35%', ease: Power3.easeInOut}, {x: '0%'},   '-=0.6')
+	
+	.fromTo("#study-container", 0.4, {x: 0}, {x: `-${greetingName.offsetTop - greetingContainer.offsetTop + window.innerHeight * 0.1}`, ease: Power3.easeIn},   '-=0.6')
+	.fromTo("#work-container", 0.4, {x: 0}, {x: `${greetingName.offsetTop - greetingContainer.offsetTop + window.innerHeight * 0.1}`, ease: Power3.easeIn},   '-=0.6')
+
+}
+
+const projectsPageLeave = () => {
+	const tl = gsap.timeline({repeat: 0, repeatDelay: 0});
+	 tl
+	.fromTo("#work__title", 0.6, {x: `-${greetingName.offsetTop - greetingContainer.offsetTop + window.innerHeight * 0.1}`}, {x: `0`, ease: Power3.easeInOut})
+	.fromTo("#work__title", 0.6, {opacity: '0', ease: Power3.easeInOut}, {opacity: '1'}, "-=0.6")
 	
 	.fromTo("#projects-preview-container", 0.4, {opacity: '1'}, {opacity: '0', ease: Power3.easeInOut}, "-=0.4")
 	.fromTo("#projects-preview-container", 0.4, {x: '0%'}, {x: '35%', ease: Power3.easeInOut}, '-=0.4')
 
+	.fromTo("#study-container", 0.4, {x: `-${greetingName.offsetTop - greetingContainer.offsetTop + window.innerHeight * 0.1}`, ease: Power3.easeIn}, {x: 0},   '-=0.6')
+	.fromTo("#work-container", 0.4, {x: `${greetingName.offsetTop - greetingContainer.offsetTop + window.innerHeight * 0.1}`, ease: Power3.easeIn}, {x: 0},   '-=0.6')
 }
 
 let skillsAreShown = false;
 
 const showSkillBars = () => {
-	if (window.innerWidth < 700) {
+	if (window.innerWidth < 800) {
 		if (!skillsAreShown) {
 			skillsAreShown = true;
 			contentDivider.classList.remove('bar-left-animation');
@@ -134,7 +162,7 @@ const showSkillBars = () => {
 }
 
 const hideSkillBars = () => {
-	if (window.innerWidth < 700) {
+	if (window.innerWidth < 800) {
 		if (skillsAreShown) {
 			contentDivider.classList.remove('bar-right-animation');
 			contentDivider.classList.add('bar-left-animation');
@@ -192,6 +220,16 @@ pageScroller.set({
 				from: '2',
 				to: '1',
 				callback: () => introductionPageEnter(),
+			},
+			{
+				from: '2',
+				to: '3',
+				callback: () => pojectsPageEnter(),
+			},
+			{
+				from: '3',
+				to: '2',
+				callback: () => projectsPageLeave(),
 			}
 		],
 	easingForAll : {
@@ -247,27 +285,66 @@ introductionSubText.addEventListener('touch', () => {
 contentDivider.addEventListener('mouseover', showSkillBars);
 skillContainer.addEventListener('mouseleave', hideSkillBars);
 
-let touchYStart = undefined;
+const hammerContent = new Hammer(document.getElementById('content-inner-container'));
+hammerContent.on('swiperight', function(ev) {
+	if (!skillsAreShown){
+		showSkillBars();
+	} 
+});
 
-contentContainer.addEventListener('touchmove', (ev) => {
-	if (!touchYStart) touchYStart = ev.touches[0].screenY;
-	const touchYDelta = touchYStart - ev.touches[0].screenY;
-	if (touchYDelta >= 0) {
-		if (skillsAreShown) {
-			hideSkillBars();
-			touchYstart = undefined;
-		}
-	} else if (touchYDelta <  0) {
-		if (!skillsAreShown){
-			showSkillBars();
-			touchYstart = undefined;
-		} 
+hammerContent.on('swipeleft', function(ev) {
+	if (skillsAreShown) {
+		hideSkillBars();
 	}
 });
 
-contentContainer.addEventListener('touchend', () => {
-	touchYStart = undefined;
-})
+let workIsShown = false
+
+const hammerWork = new Hammer(document.getElementById('work-content-container'));
+hammerWork.on('swiperight', function(ev) {
+	if (workIsShown && window.innerWidth < 1400) {
+		workIsShown = false;
+		document.getElementById('work-divider').classList.remove('bar-left-animation');
+		document.getElementById('work-divider').classList.add('bar-right-animation');
+		const workContainer = document.getElementById('work-container');
+		const tl = gsap.timeline({repeat: 0, repeatDelay: 0});
+		tl	
+			.to('#work-container', 0.6, {opacity: '0', ease: Power3.easeInOut})
+
+			.to('#work-container', 0, {'max-height': `${workContainer.offsetHeight}px`, 'min-height': `${workContainer.offsetHeight}px`}, '-=0.6')
+			.to('#work-container p ', 0, {'min-width': `${workContainer.offsetWidth}px`}, '-=0.6')
+			.to('#work-container', 0.6, {width: '0', ease: Power3.easeInOut}, '-=0.6')
+			.to('#work-container', 0, {display: 'none', ease: Power3.easeInOut})
+
+			
+			.fromTo('#study-container', 0, {display: 'block'}, {width: '80vw', ease: Power3.easeInOut}, "-=0.6")
+			.fromTo('#study-container', 0.6, {width: '0'}, {width: '80vw', ease: Power3.easeInOut}, "-=0.6")
+			.fromTo('#study-container', 0.6, {opacity: '0'}, {opacity: '1', ease: Power3.easeInOut}, "-=0.6")
+	}
+});
+
+hammerWork.on('swipeleft', function(ev) {
+	if (!workIsShown && window.innerWidth < 1400) {
+		workIsShown = true;
+		document.getElementById('work-divider').classList.remove('bar-right-animation');
+		document.getElementById('work-divider').classList.add('bar-left-animation');
+		const studyContainer = document.getElementById('study-container');
+		const workContainer = document.getElementById('work-container');
+		workContainer.style.maxHeight = `${studyContainer.offsetHeight}px`
+		const tl = gsap.timeline({repeat: 0, repeatDelay: 0});
+		tl	
+			.to('#study-container', 0.6, {opacity: '0', ease: Power3.easeInOut})
+
+			.to('#study-container', 0, {'max-height': `${studyContainer.offsetHeight}px`, 'min-height': `${studyContainer.offsetHeight}px`}, '-=0.6')
+			.to('#study-container p ', 0, {'min-width': `${studyContainer.offsetWidth}px`}, '-=0.6')
+			.to('#study-container', 0.6, {width: '0vw', ease: Power3.easeInOut}, '-=0.6')
+			.to('#study-container', 0, {display: 'none', ease: Power3.easeInOut})
+
+			.fromTo('#work-container', 0.6, {width: '0'}, {width: '80vw', ease: Power3.easeInOut}, "-=0.6")
+			.fromTo('#work-container', 0, {display: 'block'}, {width: '80vw', ease: Power3.easeInOut}, "-=0.6")
+			.fromTo('#work-container', 0.6, {opacity: '0'}, {opacity: '1', ease: Power3.easeInOut}, "-=0.6")
+	}
+});
 
 document.getElementById('arrow-container-1').addEventListener('click', () => {
 	pageScroller.scrollToPage(1);
@@ -275,3 +352,8 @@ document.getElementById('arrow-container-1').addEventListener('click', () => {
 document.getElementById('arrow-container-2').addEventListener('click', () => {
 	pageScroller.scrollToPage(2);
 });
+
+document.getElementById('arrow-container-3').addEventListener('click', () => {
+	pageScroller.scrollToPage(3);
+});
+
