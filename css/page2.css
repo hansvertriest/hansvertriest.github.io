@@ -163,7 +163,17 @@
 .skill-bar p {
 	min-width: 100%
 }
-
+#arrow-right {
+	width: 15px;
+	height: 15px;
+	align-self: center;
+	margin-right: 5px;
+	
+	animation-duration: 2s;
+	animation-iteration-count: infinite;
+	animation-name: bounce-left;
+	animation-timing-function: ease-out;
+}
 .arrow-container {
 	position: absolute;
 	bottom: 0px;
@@ -209,6 +219,10 @@
 	
 	#introduction__text {
 		font-size: 1.8em !important;
+	}
+
+	.content-inner-container {
+		width: 90vw;
 	}
 }
 

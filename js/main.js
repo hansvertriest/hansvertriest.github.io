@@ -137,6 +137,7 @@ const projectsPageLeave = () => {
 let skillsAreShown = false;
 
 const showSkillBars = () => {
+	document.getElementById('arrow-right').style.display = 'none';
 	if (window.innerWidth < 800) {
 		if (!skillsAreShown) {
 			skillsAreShown = true;
