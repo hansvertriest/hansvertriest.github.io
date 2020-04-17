@@ -63,6 +63,7 @@ const animatePage2 = () => {
 		.to("#content-container", 0, {display: 'flex'})
 		.fromTo("#content-container", 0.6, {opacity: '0'}, {opacity: '1', ease: Power3.easeInOut}, "+=0.3")
 		.fromTo("#content-container", 0.8, {x: '35%'}, {x: '0', ease: Power3.easeInOut}, '-=0.6')
+		.to("#arrow-container-2", 0.4, {opacity: '1', ease: Power3.easeInOut}, '+=2')
 		hasSaidHello = true;
 }
 
@@ -200,7 +201,6 @@ pageScroller.set({
 	},
 });
 
-// ===== Page-1
 onResize();
 window.addEventListener('resize', onResize);
 
@@ -268,3 +268,10 @@ contentContainer.addEventListener('touchmove', (ev) => {
 contentContainer.addEventListener('touchend', () => {
 	touchYStart = undefined;
 })
+
+document.getElementById('arrow-container-1').addEventListener('click', () => {
+	pageScroller.scrollToPage(1);
+});
+document.getElementById('arrow-container-2').addEventListener('click', () => {
+	pageScroller.scrollToPage(2);
+});
