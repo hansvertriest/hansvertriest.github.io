@@ -160,7 +160,8 @@
 		margin-right: 0;
 	}
 	.projects__title {
-		font-size: 5em;
+		font-size: 6em;
+		margin-left: 15px;
 	}
 }
 

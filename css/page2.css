@@ -200,6 +200,7 @@
 	.greeting__text--big-yellow {
 		color: var(--yellow);
 		font-size: 8em;
+		margin-left: 15px;
 	}
 
 	.content-container__text {
