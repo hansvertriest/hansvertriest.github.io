@@ -68,12 +68,20 @@ h1 {
 }
 
 @media only screen and (max-width: 649px) {
+	.work-content-container p strong {
+		font-size: 0.8em;
+	}
+
 	.work-content-container {
-		margin: 40px;
+		margin: 20px;
+	}
+
+	.work__title {
+		font-size: 6em;
 	}
 
 	.work-divider {
-		margin: 0 20px;
+		margin: 0 0px;
 		animation-duration: 2s;
 		animation-iteration-count: infinite;
 		animation-name: bounce-right;
@@ -84,6 +92,7 @@ h1 {
 		overflow: hidden;
 		width: 0;
 		display: none;
+		margin-left: 15px;
 	}
 }
 
