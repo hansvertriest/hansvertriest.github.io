@@ -1,9 +1,0 @@
-@import './variables.css';
-@import './landing.css';
-@import './page2.css';
-@import './page3.css';
-@import './page4.css';
-
-body {
-	overflow: hidden;
-}
