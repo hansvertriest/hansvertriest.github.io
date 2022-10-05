@@ -1,0 +1,1 @@
+import{m as e,u as t,_ as o}from"./q-09af838e.js";const s=e(t(()=>o(()=>import("./q-eb5c3883.js"),["build/q-eb5c3883.js","build/q-09af838e.js","build/q-2f5b3fd8.css"]),"s_crp5PYqmBUM")),a={title:"Hans Vertriest | Full-Stack Developers"};export{s as default,a as head};
